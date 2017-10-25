@@ -1,0 +1,4 @@
+#!/bin/sh
+set -eu
+address="$(echo "$1" | tr A-Z a-z)"
+parity-ls | jq  '."'${address}'".meta|fromjson'
