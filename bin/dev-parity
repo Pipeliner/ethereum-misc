@@ -1,0 +1,3 @@
+#!/bin/sh
+set -eux
+parity --chain dev --unlock 0x00a329c0648769A73afAc7F9381E08FB43dBEA72 --password /var/tmp/nl --force-ui --jsonrpc-apis all
