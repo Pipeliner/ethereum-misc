@@ -2,12 +2,13 @@
 
 # USAGE:
 # $ cd my-truffle-project
-# $ parity-register '0x5ae2156f198226fd2386ae5154ebc43943128d61' build/contracts/OurToken.json
+# $ parity-register '0x5ae2156f198226fd2386ae5154ebc43943128d61' build/contracts/OurToken.json "OurToken-$(date -Is)"
 
-set -eux -o pipefail
+set -eu -o pipefail
 
 address="$(echo "$1" | tr A-Z a-z)"
 buildjson="$2"
+name="$3"
 
 abi="$(jq '.abi|tostring' $buildjson)"
 # delete surrounding ""s since we don't need them for interpolating
@@ -15,4 +16,4 @@ abi="${abi:1:-1}"
 
 curl --data '{"method":"parity_setAccountMeta","params":["'"${address}"'","{\"contract\":true,\"deleted\":false,\"abi\":'"${abi}"'}"],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545
 
-
+curl --data '{"method":"parity_setAccountName","params":["'"${address}"'","'"${name}"'"],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545
