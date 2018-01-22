@@ -6,6 +6,6 @@
 # $ generate-random-eth-address
 
 set -eu
-address=0x$(hexdump -n 20 -e '5/4 "%08X" 1 "\n"' /dev/urandom)
+address=0x$(hexdump -n 20 -e '5/4 "%08x" 1 "\n"' /dev/urandom)
 [ $# -gt 0 ] || echo $address >&2
 echo $address
