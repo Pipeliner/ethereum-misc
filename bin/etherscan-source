@@ -1,0 +1,6 @@
+#!/bin/bash
+set -eu -o pipefail
+
+ADDRESS=$1
+
+curl https://etherscan.io/address/${ADDRESS} | pup 'pre#editor text{}' | recode html
